@@ -1,0 +1,202 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link rel="stylesheet" href="/public/css/main.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="row ">
+        <h4 class="mb-3 text-dark" style="margin-top: 10px;">Schedule your classes</h4>
+        <form role="form" action="/select" method="POST">  
+          <div class="input-group-md input-group-outline mb-3 " style="border:2px solid rgb(255, 204, 238);margin-right: 8px;">
+            <label >Select subject to select schedule:</label>
+            <select class="p-1" name="name">
+                <% let subjects=[]; %> 
+                <% for(let i=0;i<data.subjects.length;i++){ %>
+                   <% subjects[i]=data.subjects[i]; %>
+                    <option value=<%=subjects[i]%>><%= data.subjects[i]%></option>
+                <% } %> 
+            </select>
+            <!-- <input name='subject' type="text"> -->
+          </div>
+          <button type="submit" class="col col-lg-1 btn bg-gradient-primary my-auto ">Select</button>
+        </form>
+    </div> 
+
+    <!-- <form role="form" action="/select" method="POST">
+        <input name="user" type="email" class="form-control">
+        <button type="submit" class="col col-lg-1 btn bg-gradient-primary my-auto ">Select</button>
+    </form> -->
+
+    <div class="row">
+            <form role="form" action="/set_schedule" method="POST" >
+                <table class="table table-bordered table-condensed table-hover table-striped text-center">
+                <thead>
+                    <% if (data.selected) {%>
+                    <td>Select your schedule for upcoming week for <%=data.selected%></td>
+                    <% }else{ %>
+                    <td>Your schedule for selected subject</td>
+                    <% } %>
+                </thead>
+                <tr>
+                    <td> 
+                        Monday
+                    </td> 
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-monday" id="exampleRadios1" value="17:00">
+                            <label >
+                              17:00
+                            </label>
+                        </div>                        
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-monday" id="exampleRadios1" value="18:00">
+                            <label >
+                              18:00
+                            </label>
+                        </div>                        
+                    </td>  
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-monday" id="exampleRadios1" value="19:00">
+                            <label >
+                              19:00
+                            </label>
+                        </div>                        
+                    </td>                                                                   
+                </tr> 
+                <tr>
+                    <td> 
+                        Tuesday
+                    </td> 
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-tuesday" id="exampleRadios1" value="17:00">
+                            <label >
+                              17:00
+                            </label>
+                        </div>                        
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-tuesday" id="exampleRadios1" value="18:00">
+                            <label >
+                              18:00
+                            </label>
+                        </div>                        
+                    </td>  
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-tuesday" id="exampleRadios1" value="19:00">
+                            <label >
+                              19:00
+                            </label>
+                        </div>                        
+                    </td>                                                                   
+                </tr> 
+                <tr>
+                    <td> 
+                        Wednesday
+                    </td> 
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-wednesday" id="exampleRadios1" value="17:00">
+                            <label >
+                              17:00
+                            </label>
+                        </div>                        
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-wednesday" id="exampleRadios1" value="18:00">
+                            <label >
+                              18:00
+                            </label>
+                        </div>                        
+                    </td>  
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-wednesday" id="exampleRadios1" value="19:00">
+                            <label >
+                              19:00
+                            </label>
+                        </div>                        
+                    </td>                                                                   
+                </tr> 
+                <tr>
+                    <td> 
+                        Thursday
+                    </td> 
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-thursday" id="exampleRadios1" value="17:00">
+                            <label >
+                              17:00
+                            </label>
+                        </div>                        
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-thursday" id="exampleRadios1" value="18:00">
+                            <label >
+                              18:00
+                            </label>
+                        </div>                        
+                    </td>  
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-thursday" id="exampleRadios1" value="19:00">
+                            <label >
+                              19:00
+                            </label>
+                        </div>                        
+                    </td>                                                                   
+                </tr> 
+                <tr>
+                    <td> 
+                         Friday
+                    </td> 
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-friday" id="exampleRadios1" value="17:00">
+                            <label >
+                              17:00
+                            </label>
+                        </div>                        
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-friday" id="exampleRadios1" value="18:00">
+                            <label >
+                              18:00
+                            </label>
+                        </div>                        
+                    </td>  
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="<%=data.selected%>-friday" id="exampleRadios1" value="19:00">
+                            <label >
+                              19:00
+                            </label>
+                        </div>                        
+                    </td>                                                                   
+                </tr> 
+
+                </table>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Set</button>
+                </div>
+              </form>
+    </div> 
+   
+  <script src="/public/js/example.js"></script>
+</body>
+</html>

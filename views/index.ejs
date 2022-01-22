@@ -12,17 +12,53 @@
 
 <body>
     <div class="row">
-        <div class="col-lg-4"></div>
         <div class="col-lg-4">
-          <h1>You Searched For : <%= data.userQuery %></h1>
-          <% if(data.loggedIn){ %>
-                <h2> You are logg in as : <%= data.username %> </h2>
-            <% } %>
-          <ul>
-            <% data.searchResults.forEach(result=>{ %>
-                <li> <%= result %> </li> 
-            <% }); %>
-          </ul>
+          <h1>Hi Mentor: <%=data.user%></h1>
+          <table class="table table-bordered table-condensed table-hover table-striped text-center">
+            <thead>
+               <tr>
+                  <th scope="col">Your Schedule</th>
+               </tr>
+            </thead>
+            <tbody class="text-left">
+               <tr>
+                  <td>Subject</td>
+                  <td>time</td>
+                  <td>link</td>
+                  <td>status</td>
+               </tr>
+                <% for(let key in data.schedule) { %>
+                      <% for(let i=0;i<data.schedule[key].length;i++) { %>
+                                <tr>
+                                  <td><%=key%></td>
+                                  <td><%=data.schedule[key][i]%></td>
+                                  <td>gmeet</td>
+                                  <td>upcoming</td>
+                                </tr>
+                      <% } %>
+                <% } %>                 
+            </tbody>
+         </table>          
+        </div>
+        <div class="col-lg-4">
+          <table class="table table-bordered table-condensed table-hover table-striped text-center">
+            <thead>
+               <tr>
+                  <th scope="col">Subject </th>
+                  <th scope="col">Enrolled</th>
+                  <th scope="col">Allocated time</th>
+               </tr>
+            </thead>
+            <tbody class="text-left">
+              <% for(let i=0;i<data.subjects.length;i++) {%>
+                   <tr>
+                     <td><%=data.subjects[i]%></td>
+                     <td>0</td>
+                     <td><%=data.allocate[i]%></td>
+                   </tr>
+              <% } %>     
+            </tbody>
+         </table>          
         </div>
         <div class="col-lg-4"></div>
       </div> 
