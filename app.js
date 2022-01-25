@@ -5,24 +5,25 @@ var bodyParser = require("body-parser");
 const ejsLint = require('ejs-lint');
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use(bodyParser.urlencoded({
-//     extended: false
-// }))
 
-// app.use(express.bodyParser());
+const http= require('http').Server(app);
+const io = require("socket.io")(http,{
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"],
+        allowedHeaders: ["my-custom-header"],
+        credentials: true        
+    }
+});
 
-// app.use((req, res, next) => {
-//     const err = new Error('Not Found');
-//     err.status = 404;
-//     next(err);
-//   });
-  
-// app.use((err, req, res, next) => {
-//     res.locals.error = err;
-//     const status = err.status || 500;
-//     res.status(status);
-//     res.render('error');
-//   });
+io.on('connection', socket => {
+    console.log('Connected...')
+    socket.on('message', (msg) => {
+        console.log("msg received on server side",msg);
+        // let str="i received ur msg";
+        // socket.emit('receive', str);
+    })
+})  
 
 
 app.use('/public',express.static(path.join(__dirname,'static')));
@@ -37,6 +38,10 @@ Subjects={
     Maths:[],
     Phys:[]
 };
+
+http.listen(process.env.PORT || 3000, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
 
 ///super helpful
 app.use(( err, req, res, next ) => {
@@ -113,7 +118,4 @@ app.get('/:userQuery',(req,res)=>{
                                username : 'lkjslkjdf'}});
 });
 
-
-app.listen(process.env.PORT || 3000, function(){
-    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-  });
+// Socket 

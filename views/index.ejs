@@ -62,16 +62,42 @@
         </div>
         <div class="col-lg-4">      
         <iframe
-        src="https://tokbox.com/embed/embed/ot-embed.js?embedId=3e77ab48-6bde-43d3-bd1c-d354097ab538&room=DEFAULT_ROOM&iframe=true"
+        src="https://tokbox.com/embed/embed/ot-embed.js?embedId=3e77ab48-6bde-43d3-bd1c-d354097ab538&room=DEFAULT_ROOM&iframe=false"
         width=500
         height=500
         scrolling="auto"
         allow="microphone; camera"
         style="background-color:violet"
          ></iframe>
+         <form action="">
+          <input id="m" autocomplete="off" /><button>Send</button>
+         </form>
         </div>
       </div> 
    
   <script src="/public/js/example.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+     $(function () {
+          let id="prats";
+          const socket = io('http://localhost:3000/',
+      {
+        transports: ['websocket'], 
+        query: { id },
+        withCredentials: true 
+      });
+
+          $('form').submit(function(){
+          socket.emit('message', $('#m').val());
+          $('#m').val('');
+          return false;
+          });
+          socket.on("message", function(data) {
+            console.log("received: ",data);
+            $("#m").val(data);
+          });          
+      });
+  </script>  
 </body>
 </html>
